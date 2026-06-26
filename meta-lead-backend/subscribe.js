@@ -30,9 +30,9 @@ const req = https.request(options, (res) => {
       const response = JSON.parse(data);
       console.log("Response from Meta:", response);
       if (response.success) {
-        console.log("✅ Successfully subscribed page to your app!");
+        console.log(" Successfully subscribed page to your app!");
       } else {
-        console.error("❌ Subscription failed. See the error response above.");
+        console.error(" Subscription failed. See the error response above.");
       }
     } catch (e) {
       console.error("Failed to parse response:", data);
