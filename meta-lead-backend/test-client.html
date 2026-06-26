@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Lead Viewer</title>
+</head>
+<body>
+  <h1>Incoming Leads</h1>
+
+  <ul id="leadList"></ul>
+
+  <script src="http://localhost:5000/socket.io/socket.io.js"></script>
+
+  <script>
+    const socket = io("http://localhost:5000");
+
+    socket.on("connect", () => {
+      console.log("Connected");
+    });
+
+    socket.on("newLead", (lead) => {
+      const li = document.createElement("li");
+
+      li.innerHTML = `
+        <strong>${lead.name}</strong>
+        - ${lead.email}
+      `;
+
+      document
+        .getElementById("leadList")
+        .prepend(li);
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+# Root gitignore
+
+# Dependencies
+node_modules/
+**/node_modules/
+
+# Environment variables
+.env
+**/.env
+*.env.local
+
+# Expo
+lead-app/.expo/
+lead-app/dist/
+lead-app/web-build/
+
+# Build outputs
+build/
+dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# IDE
+.vscode/settings.json
+.idea/
+
+# ngrok binary
+ngrok.exe
+ngrok
+
+# Unused backend (keep only meta-lead-backend)
+backend/node_modules/
