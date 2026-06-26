@@ -22,7 +22,6 @@ import { LeadCard } from '@/components/LeadCard';
 import { useLeads } from '@/hooks/useLeads';
 import type { Lead } from '@/types/lead';
 
-// ── Pulsing live dot ──────────────────────────────────────────────────────────
 function LiveDot({ connected }: { connected: boolean }) {
   const scale = useSharedValue(1);
   const opacity = useSharedValue(1);
@@ -64,7 +63,6 @@ function LiveDot({ connected }: { connected: boolean }) {
   );
 }
 
-// ── Status bar ────────────────────────────────────────────────────────────────
 function ConnectionBanner({ status }: { status: string }) {
   const color =
     status === 'connected' ? '#22C55E' : status === 'connecting' ? '#F59E0B' : '#EF4444';
@@ -83,7 +81,6 @@ function ConnectionBanner({ status }: { status: string }) {
   );
 }
 
-// ── Empty state ───────────────────────────────────────────────────────────────
 function EmptyState({ status }: { status: string }) {
   const opacity = useSharedValue(0);
 
@@ -95,7 +92,7 @@ function EmptyState({ status }: { status: string }) {
 
   return (
     <Animated.View style={[styles.emptyContainer, style]}>
-      <Text style={styles.emptyIcon}>📋</Text>
+      <Text style={styles.emptyIcon}></Text>
       <Text style={styles.emptyTitle}>Waiting for leads...</Text>
       <Text style={styles.emptySubtitle}>
         {status === 'connected'
@@ -106,7 +103,6 @@ function EmptyState({ status }: { status: string }) {
   );
 }
 
-// ── Lead counter badge ────────────────────────────────────────────────────────
 function LeadCount({ count }: { count: number }) {
   return (
     <View style={styles.countBadge}>
@@ -115,14 +111,12 @@ function LeadCount({ count }: { count: number }) {
   );
 }
 
-// ── Main screen ───────────────────────────────────────────────────────────────
 export default function LeadsScreen() {
   const insets = useSafeAreaInsets();
   const { leads, status, newLeadId, sendTestLead } = useLeads();
   const listRef = useRef<FlatList>(null);
   const prevLeadCount = useRef(leads.length);
 
-  // Auto-scroll to top when a new lead arrives
   useEffect(() => {
     if (leads.length > prevLeadCount.current && listRef.current) {
       listRef.current.scrollToOffset({ offset: 0, animated: true });
@@ -138,7 +132,6 @@ export default function LeadsScreen() {
     <View style={[styles.root, { paddingTop: insets.top }]}>
       <StatusBar barStyle="light-content" backgroundColor="#0B0B13" />
 
-      {/* ── Header ── */}
       <View style={styles.header}>
         <View style={styles.headerLeft}>
           <View style={styles.metaLogo}>
@@ -156,10 +149,8 @@ export default function LeadsScreen() {
         </View>
       </View>
 
-      {/* ── Divider ── */}
       <View style={styles.divider} />
 
-      {/* ── Lead list ── */}
       {leads.length === 0 ? (
         <EmptyState status={status} />
       ) : (
@@ -177,14 +168,13 @@ export default function LeadsScreen() {
         />
       )}
 
-      {/* ── Test Button (bottom) ── */}
       {status === 'connected' && (
         <View style={[styles.testButtonWrapper, { bottom: insets.bottom + (Platform.OS === 'android' ? 90 : 70) }]}>
           <Pressable
             style={({ pressed }) => [styles.testButton, pressed && styles.testButtonPressed]}
             onPress={sendTestLead}
           >
-            <Text style={styles.testButtonText}>🧪 Send Test Lead</Text>
+            <Text style={styles.testButtonText}>Send Test Lead</Text>
           </Pressable>
         </View>
       )}
@@ -198,7 +188,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#0B0B13',
   },
 
-  // ── Header ──
   header: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -241,7 +230,6 @@ const styles = StyleSheet.create({
     gap: 6,
   },
 
-  // ── Connection ──
   connectionBanner: {
     flexDirection: 'row',
     alignItems: 'center',
@@ -264,7 +252,6 @@ const styles = StyleSheet.create({
     letterSpacing: 0.8,
   },
 
-  // ── Count ──
   countBadge: {
     backgroundColor: '#7C3AED',
     borderRadius: 20,
@@ -278,7 +265,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
   },
 
-  // ── Divider ──
   divider: {
     height: 1,
     backgroundColor: '#1E1E2E',
@@ -286,12 +272,10 @@ const styles = StyleSheet.create({
     marginBottom: 8,
   },
 
-  // ── List ──
   listContent: {
     paddingTop: 8,
   },
 
-  // ── Empty state ──
   emptyContainer: {
     flex: 1,
     alignItems: 'center',
@@ -316,7 +300,6 @@ const styles = StyleSheet.create({
     lineHeight: 22,
   },
 
-  // ── Test button ──
   testButtonWrapper: {
     position: 'absolute',
     left: 0,

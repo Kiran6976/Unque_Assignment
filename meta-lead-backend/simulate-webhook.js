@@ -10,7 +10,7 @@ const payload = {
         {
           field: "leadgen",
           value: {
-            leadgen_id: "99999" + Math.floor(10000 + Math.random() * 90000), // Random lead ID
+            leadgen_id: "99999" + Math.floor(10000 + Math.random() * 90000),
             page_id: "153125381133",
             form_id: "88888",
             adgroup_id: "77777",
@@ -49,9 +49,9 @@ const req = http.request(options, (res) => {
     console.log(`Status Code: ${res.statusCode}`);
     console.log(`Response: ${responseBody}`);
     if (res.statusCode === 200 && responseBody === 'EVENT_RECEIVED') {
-      console.log("✅ Webhook simulation sent successfully!");
+      console.log("Webhook simulation sent successfully!");
     } else {
-      console.error("❌ Failed to simulate webhook.");
+      console.error("Failed to simulate webhook.");
     }
   });
 });

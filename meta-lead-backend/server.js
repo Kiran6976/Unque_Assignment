@@ -24,12 +24,10 @@ app.set("io", io);
 
 app.use("/webhook", webhookRoutes);
 
-// ── Health check ──────────────────────────────────────────────────────────────
 app.get("/", (req, res) => {
   res.json({ status: "ok", message: "Meta Leads Server", clients: io.engine.clientsCount });
 });
 
-// ── Test lead endpoint (simulate without Meta) ────────────────────────────────
 app.post("/test-lead", (req, res) => {
   const names = ["Priya Sharma", "Rahul Mehta", "Anjali Singh", "Arjun Patel", "Neha Gupta"];
   const randomName = names[Math.floor(Math.random() * names.length)];
@@ -49,7 +47,7 @@ app.post("/test-lead", (req, res) => {
   };
 
   io.emit("newLead", lead);
-  console.log("[Test] 🧪 Test lead emitted:", lead.name);
+  console.log("[Test] Test lead emitted:", lead.name);
   res.json({ success: true, lead });
 });
 

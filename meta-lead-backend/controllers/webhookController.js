@@ -9,11 +9,11 @@ exports.verifyWebhook = (req, res) => {
     mode === "subscribe" &&
     token === process.env.META_VERIFY_TOKEN   
   ) {
-    console.log("[Webhook]  Verified successfully");
+    console.log("[Webhook] Verified successfully");
     return res.status(200).send(challenge);
   }
 
-  console.warn("[Webhook]  Verification failed — token mismatch");
+  console.warn("[Webhook] Verification failed — token mismatch");
   console.warn(`Expected: ${process.env.META_VERIFY_TOKEN}, Got: ${token}`);
   return res.sendStatus(403);
 };
@@ -21,10 +21,9 @@ exports.verifyWebhook = (req, res) => {
 exports.receiveLead = (req, res) => {
   const io = req.app.get("io");
 
-  // Always respond quickly so Meta doesn't retry
   res.status(200).send("EVENT_RECEIVED");
 
-  console.log("[Webhook]  Lead payload received:");
+  console.log("[Webhook] Lead payload received:");
   console.log(JSON.stringify(req.body, null, 2));
 
   try {
@@ -54,7 +53,7 @@ exports.receiveLead = (req, res) => {
           isTest: false,
         };
 
-        console.log("[Webhook]  Emitting lead via Socket.IO:", leadData.name);
+        console.log("[Webhook] Emitting lead via Socket.IO:", leadData.name);
         io.emit("newLead", leadData);
       }
     }

@@ -32,7 +32,7 @@ export function useLeads(): UseLeadsReturn {
     console.log(`[Socket.IO] Connecting to ${SERVER_URL}...`);
 
     const socket = io(SERVER_URL, {
-      transports: ['polling', 'websocket'],  // polling first — more reliable on emulator
+      transports: ['polling', 'websocket'],
       reconnection: true,
       reconnectionAttempts: 20,
       reconnectionDelay: 2000,
@@ -41,7 +41,7 @@ export function useLeads(): UseLeadsReturn {
     socketRef.current = socket;
 
     socket.on('connect', () => {
-      console.log('[Socket.IO] Connected ✅', socket.id);
+      console.log('[Socket.IO] Connected', socket.id);
       setStatus('connected');
     });
 
@@ -56,11 +56,10 @@ export function useLeads(): UseLeadsReturn {
     });
 
     socket.on('reconnect', () => {
-      console.log('[Socket.IO] Reconnected ✅');
+      console.log('[Socket.IO] Reconnected');
       setStatus('connected');
     });
 
-    // Listen for new leads from Meta webhook
     socket.on('newLead', handleNewLead);
 
     return () => {
@@ -77,7 +76,6 @@ export function useLeads(): UseLeadsReturn {
         body: JSON.stringify({}),
       });
     } catch (err) {
-      // If test-lead endpoint not available, emit directly via socket
       const socket = socketRef.current;
       if (socket) {
         const testLead: Lead = {

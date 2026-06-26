@@ -54,7 +54,6 @@ function getInitials(name: string): string {
     .toUpperCase();
 }
 
-// Deterministic color from name
 const AVATAR_COLORS = [
   ['#7C3AED', '#A78BFA'],
   ['#0EA5E9', '#38BDF8'],
@@ -112,19 +111,15 @@ export function LeadCard({ lead, isNew, index }: LeadCardProps) {
 
   return (
     <Animated.View style={[styles.wrapper, cardStyle]}>
-      {/* Animated border for new leads */}
       <Animated.View style={[styles.newBorder, borderStyle]} pointerEvents="none" />
 
-      {/* Glow overlay */}
       <Animated.View style={[styles.glowOverlay, glowStyle]} pointerEvents="none" />
 
       <View style={styles.card}>
-        {/* Left: Avatar */}
         <View style={[styles.avatar, { backgroundColor: avatarFrom }]}>
           <Text style={styles.avatarText}>{getInitials(lead.name)}</Text>
         </View>
 
-        {/* Center: Lead info */}
         <View style={styles.info}>
           <View style={styles.nameRow}>
             <Text style={styles.name} numberOfLines={1}>
@@ -139,17 +134,17 @@ export function LeadCard({ lead, isNew, index }: LeadCardProps) {
 
           {lead.email ? (
             <Text style={styles.detail} numberOfLines={1}>
-              ✉ {lead.email}
+              {lead.email}
             </Text>
           ) : null}
           {lead.phone ? (
             <Text style={styles.detail} numberOfLines={1}>
-              📱 {lead.phone}
+              {lead.phone}
             </Text>
           ) : null}
           {lead.city ? (
             <Text style={styles.detail} numberOfLines={1}>
-              📍 {lead.city}
+              {lead.city}
             </Text>
           ) : null}
 
@@ -158,7 +153,6 @@ export function LeadCard({ lead, isNew, index }: LeadCardProps) {
           </Text>
         </View>
 
-        {/* Right: Time */}
         <View style={styles.timeCol}>
           <Text style={styles.time}>{formatTime(lead.receivedAt)}</Text>
           <Text style={styles.date}>{formatDate(lead.receivedAt)}</Text>
