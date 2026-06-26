@@ -169,9 +169,3 @@ To link it to the actual Facebook Lead Ads testing console:
 
 Please refer to [ASSUMPTIONS.md](./ASSUMPTIONS.md) for full context on technical decisions, design choices, and scoping limits.
 
----
-
-## 📬 Contact
-
-Built for the **Unque** offline developer evaluation.
-* **Submitted to:** krishna@unque.me
